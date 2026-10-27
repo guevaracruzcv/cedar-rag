@@ -1,0 +1,194 @@
+Lesson 10 - Task 3: Q1 embedding k experiment
+Question: May a trained graduate student operate the laser alone at 19:00?
+Required evidence: A1 (access hours) and A2 (two-person operating rule).
+Evidence coverage = number of required passage IDs selected / 2 * 100.
+This measures required-passage coverage, not the fraction of selected passages that are relevant.
+Runs use the existing embedding_retriever.py unchanged, real cached all-MiniLM-L6-v2 weights, and CPU.
+
+=== ACTUAL OUTPUT: k=1 ===
+Command: .\.venv\Scripts\python.exe embedding_retriever.py "May a trained graduate student operate the laser alone at 19:00?" --k 1
+Model: sentence-transformers/all-MiniLM-L6-v2
+Package numpy: 2.5.4
+Package sentence-transformers: 6.2.0
+Package torch: 2.14.1
+Package transformers: 5.21.0
+Package huggingface-hub: 2.3.0
+Device: cpu
+Document matrix shape: (6, 384); dtype: float32
+Document embeddings computed once and reused across questions.
+All 384 coordinates, not just the displayed 12, are used in retrieval.
+Coordinates below are rounded only for display; arithmetic uses unrounded values.
+Model float32 values are promoted to float64 for scoring and inspection arithmetic.
+
+Document vectors (first 12 coordinates):
+  A1 | access.txt | -0.0039 0.0188 0.0218 -0.0179 -0.0058 -0.0612 -0.0891 0.0321 -0.0584 0.0111 0.0031 -0.0123
+    Vector length: 1.000000005; approximately 1: True
+  A2 | access.txt | 0.0298 -0.0435 -0.0289 0.0303 -0.0507 -0.0310 0.0361 -0.0391 -0.0322 -0.0424 0.0498 0.0019
+    Vector length: 1.000000005; approximately 1: True
+  T1 | training.txt | 0.0063 -0.0708 0.0345 0.0146 -0.1167 -0.0114 -0.0708 -0.0761 -0.0806 -0.0767 0.0325 0.1357
+    Vector length: 0.999999984; approximately 1: True
+  T2 | training.txt | 0.0447 -0.0044 0.0042 -0.0058 0.0211 -0.0151 -0.0108 -0.0301 -0.0191 -0.0234 0.0280 -0.0367
+    Vector length: 1.000000040; approximately 1: True
+  B1 | booking.txt | 0.0856 -0.0417 -0.0194 0.0377 -0.0668 -0.0053 -0.0260 -0.0618 -0.0186 -0.0023 -0.0050 0.0659
+    Vector length: 1.000000029; approximately 1: True
+  B2 | booking.txt | 0.0673 0.0924 -0.0079 0.0634 -0.0105 0.0043 -0.0020 -0.0750 0.0667 0.0378 -0.0040 0.0335
+    Vector length: 1.000000002; approximately 1: True
+
+Question 1: May a trained graduate student operate the laser alone at 19:00?
+Question vector shape: (384,); dtype: float32
+First 12 coordinates: 0.0485 0.0060 -0.0148 -0.0017 -0.0642 -0.0427 0.0008 -0.0575 -0.0771 -0.0306 0.0749 0.0967
+Vector length: 1.000000078; approximately 1: True
+
+All six scores (descending dot product, ascending ID for ties):
+  A2 | access.txt | dot=0.686445741 | direct cosine=0.686445684
+  T1 | training.txt | dot=0.581952918 | direct cosine=0.581952882
+  B1 | booking.txt | dot=0.532696345 | direct cosine=0.532696288
+  A1 | access.txt | dot=0.374248889 | direct cosine=0.374248858
+  T2 | training.txt | dot=0.270452209 | direct cosine=0.270452177
+  B2 | booking.txt | dot=0.128739670 | direct cosine=0.128739660
+Dot products and direct cosines agree: True (rtol=1e-6, atol=1e-7)
+
+Selected IDs (k=1): A2
+  [A2] access.txt: The laser room requires two trained people to be present whenever the laser is operating, including during general laboratory access hours.
+
+Q1 inspection with top passage A2:
+  Coordinate  1: 0.0485 * 0.0298 = 0.001447524
+  Coordinate  2: 0.0060 * -0.0435 = -0.000263102
+  Coordinate  3: -0.0148 * -0.0289 = 0.000426194
+  Coordinate  4: -0.0017 * 0.0303 = -0.000050414
+  Coordinate  5: -0.0642 * -0.0507 = 0.003257754
+  Coordinate  6: -0.0427 * -0.0310 = 0.001323963
+  Coordinate  7: 0.0008 * 0.0361 = 0.000028043
+  Coordinate  8: -0.0575 * -0.0391 = 0.002250284
+  Coordinate  9: -0.0771 * -0.0322 = 0.002482961
+  Coordinate 10: -0.0306 * -0.0424 = 0.001297256
+  Coordinate 11: 0.0749 * 0.0498 = 0.003730074
+  Coordinate 12: 0.0967 * 0.0019 = 0.000180956
+First 12 product subtotal: 0.016111493
+Remaining 372 product subtotal: 0.670334248
+Full similarity (all 384): 0.686445741
+Direct cosine from vector lengths: 0.686445684
+Displayed factors are rounded; products use the original unrounded values.
+
+Extremes among the displayed coordinates (documents and questions):
+  Smallest: -0.1167 (T1, coordinate 5)
+  Largest: 0.1357 (T1, coordinate 12)
+Individual coordinates have no assigned semantic names; meaning is represented by the vector as a whole.
+encode_query and encode_document distinguish roles; this model uses the same underlying encoding behavior for both.
+Encoding and retrieval do not generate an answer. Answer generation comes later.
+
+Standard error (model-loading diagnostics):
+Could not reach the Hub (Cannot reach https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2: offline mode is enabled. To disable it, please unset the `HF_HUB_OFFLINE` environment variable.). Using cached commit hash for 'sentence-transformers/all-MiniLM-L6-v2'.
+
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 103/103 [00:00<00:00, 2250.56it/s]
+
+
+=== ACTUAL OUTPUT: k=3 ===
+Command: .\.venv\Scripts\python.exe embedding_retriever.py "May a trained graduate student operate the laser alone at 19:00?" --k 3
+Model: sentence-transformers/all-MiniLM-L6-v2
+Package numpy: 2.5.4
+Package sentence-transformers: 6.2.0
+Package torch: 2.14.1
+Package transformers: 5.21.0
+Package huggingface-hub: 2.3.0
+Device: cpu
+Document matrix shape: (6, 384); dtype: float32
+Document embeddings computed once and reused across questions.
+All 384 coordinates, not just the displayed 12, are used in retrieval.
+Coordinates below are rounded only for display; arithmetic uses unrounded values.
+Model float32 values are promoted to float64 for scoring and inspection arithmetic.
+
+Document vectors (first 12 coordinates):
+  A1 | access.txt | -0.0039 0.0188 0.0218 -0.0179 -0.0058 -0.0612 -0.0891 0.0321 -0.0584 0.0111 0.0031 -0.0123
+    Vector length: 1.000000005; approximately 1: True
+  A2 | access.txt | 0.0298 -0.0435 -0.0289 0.0303 -0.0507 -0.0310 0.0361 -0.0391 -0.0322 -0.0424 0.0498 0.0019
+    Vector length: 1.000000005; approximately 1: True
+  T1 | training.txt | 0.0063 -0.0708 0.0345 0.0146 -0.1167 -0.0114 -0.0708 -0.0761 -0.0806 -0.0767 0.0325 0.1357
+    Vector length: 0.999999984; approximately 1: True
+  T2 | training.txt | 0.0447 -0.0044 0.0042 -0.0058 0.0211 -0.0151 -0.0108 -0.0301 -0.0191 -0.0234 0.0280 -0.0367
+    Vector length: 1.000000040; approximately 1: True
+  B1 | booking.txt | 0.0856 -0.0417 -0.0194 0.0377 -0.0668 -0.0053 -0.0260 -0.0618 -0.0186 -0.0023 -0.0050 0.0659
+    Vector length: 1.000000029; approximately 1: True
+  B2 | booking.txt | 0.0673 0.0924 -0.0079 0.0634 -0.0105 0.0043 -0.0020 -0.0750 0.0667 0.0378 -0.0040 0.0335
+    Vector length: 1.000000002; approximately 1: True
+
+Question 1: May a trained graduate student operate the laser alone at 19:00?
+Question vector shape: (384,); dtype: float32
+First 12 coordinates: 0.0485 0.0060 -0.0148 -0.0017 -0.0642 -0.0427 0.0008 -0.0575 -0.0771 -0.0306 0.0749 0.0967
+Vector length: 1.000000078; approximately 1: True
+
+All six scores (descending dot product, ascending ID for ties):
+  A2 | access.txt | dot=0.686445741 | direct cosine=0.686445684
+  T1 | training.txt | dot=0.581952918 | direct cosine=0.581952882
+  B1 | booking.txt | dot=0.532696345 | direct cosine=0.532696288
+  A1 | access.txt | dot=0.374248889 | direct cosine=0.374248858
+  T2 | training.txt | dot=0.270452209 | direct cosine=0.270452177
+  B2 | booking.txt | dot=0.128739670 | direct cosine=0.128739660
+Dot products and direct cosines agree: True (rtol=1e-6, atol=1e-7)
+
+Selected IDs (k=3): A2, T1, B1
+  [A2] access.txt: The laser room requires two trained people to be present whenever the laser is operating, including during general laboratory access hours.
+  [T1] training.txt: Laser training must be renewed every 12 months. A current training record is required before operating the laser.
+  [B1] booking.txt: Laser room bookings are limited to two hours per session. Reserve the room through the equipment calendar.
+
+Q1 inspection with top passage A2:
+  Coordinate  1: 0.0485 * 0.0298 = 0.001447524
+  Coordinate  2: 0.0060 * -0.0435 = -0.000263102
+  Coordinate  3: -0.0148 * -0.0289 = 0.000426194
+  Coordinate  4: -0.0017 * 0.0303 = -0.000050414
+  Coordinate  5: -0.0642 * -0.0507 = 0.003257754
+  Coordinate  6: -0.0427 * -0.0310 = 0.001323963
+  Coordinate  7: 0.0008 * 0.0361 = 0.000028043
+  Coordinate  8: -0.0575 * -0.0391 = 0.002250284
+  Coordinate  9: -0.0771 * -0.0322 = 0.002482961
+  Coordinate 10: -0.0306 * -0.0424 = 0.001297256
+  Coordinate 11: 0.0749 * 0.0498 = 0.003730074
+  Coordinate 12: 0.0967 * 0.0019 = 0.000180956
+First 12 product subtotal: 0.016111493
+Remaining 372 product subtotal: 0.670334248
+Full similarity (all 384): 0.686445741
+Direct cosine from vector lengths: 0.686445684
+Displayed factors are rounded; products use the original unrounded values.
+
+Extremes among the displayed coordinates (documents and questions):
+  Smallest: -0.1167 (T1, coordinate 5)
+  Largest: 0.1357 (T1, coordinate 12)
+Individual coordinates have no assigned semantic names; meaning is represented by the vector as a whole.
+encode_query and encode_document distinguish roles; this model uses the same underlying encoding behavior for both.
+Encoding and retrieval do not generate an answer. Answer generation comes later.
+
+Standard error (model-loading diagnostics):
+Could not reach the Hub (Cannot reach https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2: offline mode is enabled. To disable it, please unset the `HF_HUB_OFFLINE` environment variable.). Using cached commit hash for 'sentence-transformers/all-MiniLM-L6-v2'.
+
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 103/103 [00:00<00:00, 2918.85it/s]
+
+
+=== EXPERIMENT REPORT (based on the actual runs above) ===
+
+k=1
+Selected passages and similarity scores (rank order):
+  A2: 0.686445741
+Both required passages A1 and A2 retrieved: no
+Required IDs retrieved: A2
+Required IDs missing: A1
+Evidence coverage: 1/2 = 50%
+Contribution: The two-trained-person rule whenever the laser operates, including during access hours.
+Additional passages: none at k=1.
+
+k=3
+Selected passages and similarity scores (rank order):
+  A2: 0.686445741
+  T1: 0.581952918
+  B1: 0.532696345
+Both required passages A1 and A2 retrieved: no
+Required IDs retrieved: A2
+Required IDs missing: A1
+Evidence coverage: 1/2 = 50%
+Additional passages compared with k=1:
+  T1: Training renewal every 12 months and a current training record before operating the laser.
+  B1: The two-hour booking limit and equipment-calendar reservation procedure.
+These additions do not supply the missing A1 access-hours evidence, so the evidence remains partial.
+
+Preservation check: SHA-256 hashes of all existing project files outside dependency/cache folders are unchanged. Retrieval algorithms and rankings were not modified. Task 4 was not started.

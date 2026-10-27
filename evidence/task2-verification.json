@@ -1,0 +1,12 @@
+{
+  "original_files_unchanged": {
+    "keyword_retriever.py": true,
+    "README.md": true,
+    "docs\\access.txt": true,
+    "docs\\booking.txt": true,
+    "docs\\training.txt": true,
+    "evidence\\keyword-q1.txt": true
+  },
+  "q1_output_checks": "passed",
+  "runtime_vector_shape_norm_cosine_and_product_sum_assertions": "passed in successful Q1 run"
+}

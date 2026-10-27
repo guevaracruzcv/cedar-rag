@@ -1,0 +1,8 @@
+Individual Reflection — Cedar Lab RAG
+Guevara Cruz | MIT Agentic AI — Lesson 10
+
+Working individually with ChatGPT and Codex as support, I learned how a RAG system separates information retrieval from answer generation. Starting with six source passages, I compared keyword matching with embeddings, selected relevant evidence, and used a language model to generate cited answers. I also learned the importance of checking each claim against its supporting source.
+
+The most significant limitation appeared in Q1. Keyword retrieval found both required passages, while embeddings missed A1. Increasing k from one to three did not improve evidence coverage beyond 50%. Q4 also demonstrated that retrieving similar passages does not guarantee that an answer exists.
+
+As a next step, I would test hybrid retrieval, combining keyword and semantic search. I would compare evidence coverage and irrelevant results to determine whether this approach improves reliability.

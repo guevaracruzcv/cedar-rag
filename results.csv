@@ -1,0 +1,5 @@
+question_id,keyword_top_ids,keyword_scores,embedding_top_ids,embedding_scores,required_ids,keyword_evidence_complete,embedding_evidence_complete,observation
+Q1,A1; A2,3; 2,A2; T1,0.686445741; 0.581952918,A1; A2,Yes,No (partial: 1/2),"Keyword retrieved A1 and A2. Embeddings retrieved A2 but missed A1, leaving the access-hours evidence incomplete"
+Q2,A2; B1,2; 1,A2; T1,0.585193445; 0.434760706,A2,Yes,Yes,"Both methods retrieved A2 as the top passage, correctly identifying the two-person laser operation requirement."
+Q3,T1; A2,2; 1,T1; B1,0.742027476; 0.471195408,T1,Yes,Yes,"Both methods retrieved T1 as the top passage, correctly identifying the 12-month training renewal requirement."
+Q4,A2; B1,1; 1,T1; A2,0.347721381; 0.320827226,absent,N/A (absent),N/A (absent),"The laser wavelength is not specified in the sources. Both methods returned passages, but none contains the answer."

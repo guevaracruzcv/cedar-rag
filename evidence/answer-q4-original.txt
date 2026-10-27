@@ -1,0 +1,5 @@
+The supplied passages do not state the laser wavelength. The wavelength value and its unit are missing.
+
+Claim support:
+
+- The laser wavelength is not provided: neither [T1] nor [A2] specifies a wavelength.

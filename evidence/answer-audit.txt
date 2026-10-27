@@ -1,0 +1,77 @@
+CEDAR LAB RAG CHALLENGE - LESSON 10
+TASK 4: HUMAN AUDIT OF GROUNDED ANSWERS
+Date: 2026-10-27
+
+PURPOSE AND EVIDENCE
+This record documents the human review of the Codex answers to Q1 and Q4.
+The answer-generation conversations were given only the two passages
+selected by embedding retrieval at k=2: A2 and T1 (in their ranked order
+for each question). They were instructed not to consult other files,
+websites, or background knowledge. This audit is based on the actual
+Codex responses shared during the exercise, not on simulated outputs.
+The student should review and confirm this record before submission.
+
+Q1 - MAY A TRAINED GRADUATE STUDENT OPERATE THE LASER ALONE AT 19:00?
+Retrieved evidence: A2 (similarity 0.686445741), T1 (0.581952918).
+Required evidence for the full time-and-operation explanation: A1 and A2.
+Embedding retrieval coverage at k=2: 1 of 2 required passages (50%).
+
+Original answer - HUMAN AUDIT
+- Correctly answered "No": A2 requires two trained people whenever
+  the laser operates, including during general access hours.
+- Correctly cited A2 for the two-person rule and T1 for the requirement
+  to renew training every 12 months and have a current training record.
+- Correctly recognized that the student's current training status was
+  not established by the passages.
+- Limitation: did not explicitly say that the provided passages contain
+  no general laboratory access-hours schedule. A1 was not retrieved.
+- No unsupported factual assertion was identified in the original answer.
+Decision: Correct core answer, but incomplete acknowledgment of missing
+          access-hours evidence. One instruction revision was warranted.
+
+Revised answer - HUMAN AUDIT
+- Preserved the correct prohibition on solo laser operation, citing A2.
+- Explicitly stated that the supplied passages do not establish whether
+  19:00 is within the general laboratory access hours.
+- Correctly separated the missing hours information from the two-person
+  condition, which applies whenever the laser operates.
+- Cited T1 for the renewal interval and current-record requirement,
+  without claiming knowledge of this particular student's record.
+- Did not introduce A1, a made-up access schedule, or a false citation.
+Decision: PASS after one instruction revision. The omission was corrected
+          while retaining the same two retrieved passages.
+
+Q4 - WHAT IS THE LASER WAVELENGTH?
+Retrieved evidence: T1 (similarity 0.347721381), A2 (0.320827226).
+Evidence target: ABSENT; neither supplied passage states a wavelength.
+
+Original answer - HUMAN AUDIT
+- Stated that the supplied passages do not specify the laser wavelength.
+- Identified the missing wavelength value and unit.
+- Correctly noted that neither T1 nor A2 provides the information.
+- Did not invent a wavelength or attach an unsupported citation to one.
+Decision: PASS on the first attempt. No revision was necessary.
+
+OVERALL HUMAN JUDGMENT
+- Retrieval and answer grounding are separate checks: a passage can be
+  semantically similar without answering the question.
+- For Q1, embedding retrieval omitted A1, but A2 was sufficient for the
+  narrow conclusion that solo laser operation is prohibited. The revised
+  answer appropriately acknowledged the missing access-hours evidence.
+- For Q4, the model correctly refrained from supplying an answer absent
+  from the provided evidence.
+- No additional retrieval runs, source passages, or fabricated results
+  were introduced during the answer review.
+
+RELATED LOCAL EVIDENCE FILES
+- results.csv
+- evidence/retrieval-runs.txt
+- evidence/k-experiment.txt
+- evidence/answer-q1-original.txt
+- evidence/answer-q1-revised.txt
+- evidence/answer-q4-original.txt
+
+FINAL STATUS
+Task 4 answer audit: COMPLETE (Q1 passed after one revision; Q4 passed
+on first attempt). This record captures the judgments; the final
+academic submission and individual reflection remain separate tasks.
